@@ -1,0 +1,23 @@
+/*
+ * SnapCar Theme
+ * Versión: 1.0
+ */
+
+// Variables globales
+$app-bg: #FAFAFA; // #252830
+$app-font: 'Roboto', sans-serif;
+$brand-color: #006BFF;
+$brand-logo-iso: '../assets/img/logo-mobile.svg';
+
+body,
+html {
+    background: linear-gradient(to top, #004099 0%, $brand-color 100%);
+    background-color: transparent;
+    height: 100%;
+    font-family: $app-font;
+}
+
+.container-fluid {
+    padding-left: 10px;
+    padding-right: 10px;
+}

@@ -1,0 +1,16 @@
+@import '../app.component';
+
+body {
+    background-color: linear-gradient(to top, #004099 0%, $brand-color 100%);
+}
+
+.login-container {
+    height: 100%;
+    width: 100%;
+    margin-bottom: -20px;
+}
+
+.btn {
+    background-color: $brand-color;
+    box-shadow: none;
+}

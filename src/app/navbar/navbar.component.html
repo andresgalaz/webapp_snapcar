@@ -1,0 +1,18 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" materialize="sideNav" class="brand-logo" data-activates="slide-out"></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+                <a href="#">
+                    <b class="badge bg-danger" *ngIf="notifications > 0">{{ notifications }}</b>
+                    <i class="material-icons">notifications</i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="material-icons">power_settings_new</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

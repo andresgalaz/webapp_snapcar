@@ -1,0 +1,9 @@
+<div class="score-gauge">
+    <div class="score-number">{{ scoreNumber }}</div>
+    <div class="score-text">{{ scoreText }}</div>
+    <canvas width="200" baseChart
+        [chartType]="chartType"
+        [colors]="chartColors"
+        [datasets]="chartDataSets"
+        [options]="chartOptions"></canvas>
+</div>

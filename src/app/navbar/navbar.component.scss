@@ -1,0 +1,41 @@
+@import '../app.component';
+
+nav {
+    background: linear-gradient(to left, #004099 0%, $brand-color 100%);
+    color: #FFF;
+}
+
+.brand-logo {
+    background-size: 50px 40px;
+    background: url($brand-logo-iso) center no-repeat;
+    height: 64px;
+    width: 54px;
+    margin-left: 20px;
+}
+
+.badge {
+    background-color: #777;
+    border-radius: 10px;
+    color: #FFF;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    margin: 0 -0.5em;
+    min-width: 10px;
+    padding: 3px 6px;
+    // position: relative;
+    position: absolute;
+    // right: -8px;
+    right: 65px;
+    text-align: center;
+    // top: -10px;
+    top: 12px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.badge.bg-danger {
+    color: #FFF;
+    background-color: #E82C00;
+}

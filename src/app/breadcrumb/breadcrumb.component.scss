@@ -1,0 +1,33 @@
+@import '../app.component';
+
+.sub-nav h4 {
+    font-size: 2em;
+    font-weight: 100;
+    margin-bottom: 0;
+}
+
+.sub-nav hr {
+    background-color: #DCDCDC;
+    border: 0;
+    height: 1px;
+}
+
+.nav-breadcrumb {
+    background-color: transparent;
+    box-shadow: none;
+    color: $brand-color;
+}
+
+.breadcrumb {
+    color: $brand-color;
+    font-size: 1em;    
+}
+
+.breadcrumb:before {
+    color: #E2E2E2;
+    margin: 0;
+}
+
+.breadcrumb:last-of-type {
+    color: #9D9D9D !important;
+}
