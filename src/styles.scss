@@ -9,14 +9,22 @@ $app-font: 'Roboto', sans-serif;
 $brand-color: #006BFF;
 $brand-logo-iso: '../assets/img/logo-mobile.svg';
 
-body,
-html {
+html { height: 100vh; }
+
+body {
     background: linear-gradient(to top, #004099 0%, $brand-color 100%);
-    // background-color: transparent;
-    // background: $app-bg;
-    height: 100%;
     font-family: $app-font;
+    min-height: 100vh;
 }
+
+// body,
+// html {
+//     background: linear-gradient(to top, #004099 0%, $brand-color 100%);
+//     background-color: transparent;
+//     background: $app-bg;
+//     height: 100vh;
+//     font-family: $app-font;
+// }
 
 .fluid-container {
     padding-left: 10px;
@@ -27,7 +35,7 @@ html {
     align-items: center;
     display: flex;
     flex-direction: row;
-    height: 100%;
+    height: 100vh;
     justify-content: center;
     margin: 0;
     padding: 0;
@@ -106,3 +114,16 @@ hr {
     border-top: 1px solid rgba(160, 160, 160, 0.2);
     padding: 0;
 }
+
+/* MediaQuery */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .flex-container {
+        flex-direction: column;
+    }
+}
+
+// @media only screen and (min-width : 481px) and (max-width : 667px) {
+//     body {
+//         height: auto;
+//     }
+// }

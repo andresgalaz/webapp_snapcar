@@ -14,15 +14,10 @@
                                 </div>
                             </div>
                             <div class="input-field col s12">
-                                <input type="email" class="validate" id="email"
-                                    required
-                                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-                                    name="email"
-                                    ngModel
-                                    #email="ngModel">
+                                <input type="email" class="validate" id="email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" name="email"
+                                    ngModel #email="ngModel">
                                 <label for="email">Email</label>
-                                <div *ngIf="email.errors && (email.dirty && email.touched)"
-                                    class="form-error" [@fadeInOut]>
+                                <div *ngIf="email.errors && (email.dirty && email.touched)" class="form-error" [@fadeInOut]>
                                     <div [hidden]="!email.errors.required">
                                         Ingresá tu email
                                     </div>
@@ -32,15 +27,9 @@
                                 </div>
                             </div>
                             <div class="input-field col s12">
-                                <input type="password" class="validate" id="password"
-                                    required
-                                    minlength="4"
-                                    name="password"
-                                    ngModel
-                                    #password="ngModel">
+                                <input type="password" class="validate" id="password" required minlength="4" name="password" ngModel #password="ngModel">
                                 <label for="password">Contraseña</label>
-                                <div *ngIf="password.errors && (password.dirty && password.touched)"
-                                    class="form-error" [@fadeInOut]>
+                                <div *ngIf="password.errors && (password.dirty && password.touched)" class="form-error" [@fadeInOut]>
                                     <div [hidden]="!password.errors.required">
                                         Ingresá tu contraseña
                                     </div>
@@ -71,7 +60,7 @@
                                 </a>
                             </div>
                             <div class="col s6">
-                                <div class="g-signin2" id="my-signin2" data-width="147" data-onsuccess="onSignIn"></div>
+                                <div class="g-signin2" id="my-signin2" data-width="standard" data-theme="dark" data-onsuccess="onSignIn"></div>
                             </div>
                         </div>
                         <div class="row">
