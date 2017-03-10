@@ -1,50 +1,120 @@
-<div class="container">
-    <div class="row">
-        <div class="col s6 card">
-            <div class="card-content">
-                <span class="card-title">Ingresar</span>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="email" type="email" class="validate">
-                        <label for="email">Email</label>
+<div class="flex-container">
+    <div class="flex-item">
+        <img src="../assets/img/logo.svg" alt="SnapCar" width="200">
+    </div>
+    <div class="flex-item">
+        <div class="row">
+            <div class="col card login">
+                <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" novalidate>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="progress" *ngIf="loading">
+                                    <div class="indeterminate"></div>
+                                </div>
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="email" class="validate" id="email"
+                                    required
+                                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                    name="email"
+                                    ngModel
+                                    #email="ngModel">
+                                <label for="email">Email</label>
+                                <div *ngIf="email.errors && (email.dirty && email.touched)"
+                                    class="form-error" [@fadeInOut]>
+                                    <div [hidden]="!email.errors.required">
+                                        Ingresá tu email
+                                    </div>
+                                    <div [hidden]="!email.errors.pattern">
+                                        Ingresá un email válido
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="password" class="validate" id="password"
+                                    required
+                                    minlength="4"
+                                    name="password"
+                                    ngModel
+                                    #password="ngModel">
+                                <label for="password">Contraseña</label>
+                                <div *ngIf="password.errors && (password.dirty && password.touched)"
+                                    class="form-error" [@fadeInOut]>
+                                    <div [hidden]="!password.errors.required">
+                                        Ingresá tu contraseña
+                                    </div>
+                                    <div [hidden]="!password.errors.minlength">
+                                        Ingresá una contraseña válida
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12">
+                                <div class="form-error" *ngIf="error" [@fadeInOut]>
+                                    {{ error }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="input-field col s12">
-                        <input id="password" type="password" class="validate">
-                        <label for="email">Contraseña</label>
+                    <div class="card-action">
+                        <div class="row">
+                            <div class="col s12">
+                                <button class="btn btn-full-width waves-effect waves-light" type="submit" name="action" [disabled]="!loginForm.form.valid">
+                                    Ingresar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6">
+                                <a class="btn btn-full-width waves-effect waves-light facebook-signin" (click)="facebookLogin()">
+                                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="col s6">
+                                <div class="g-signin2" id="my-signin2" data-width="147" data-onsuccess="onSignIn"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <hr/>
+                            </div>
+                            <div class="col s7 center-align">
+                                <a (click)="openModal()" class="login-link"> Olvidé la contraseña</a>
+                            </div>
+                            <div class="col s5 center-align">
+                                <a href="signup" class="login-link"> Registrate</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="card-action">
-                <input type="submit" class="btn waves-effect" value="Ingresar">
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<!--<div class="valign-wrapper row login-container">
-    <div class="col s10 pull-s1 m6 pull-m3 l4 pull-l4">
-        <p>Test</p>
-    </div>
-
-    <div class="col card s10 pull-s1 m6 pull-m3 l4 pull-l4">
+<div id="resetPassword" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+    <div class="modal-content">
+        <h5>Recuperar Contraseña</h5>
         <form>
-            <div class="card-content">
-                <span class="card-title">Ingresar</span>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <label for="email">Email</label>
-                        <input type="email" class="validate" name="email" id="email" />
-                    </div>
-                    <div class="input-field col s12">
-                        <label for="password">Contraseña </label>
-                        <input type="password" class="validate" name="password" id="password" />
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="email" class="validate" id="email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" name="email"
+                        ngModel #email="ngModel">
+                    <label for="email">Email</label>
+                    <div *ngIf="email.errors && (email.dirty && email.touched)" class="form-error" [@fadeInOut]>
+                        <div [hidden]="!email.errors.required">
+                            Ingresá tu email
+                        </div>
+                        <div [hidden]="!email.errors.pattern">
+                            Ingresá un email válido
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card-action right-align">
-                <input type="reset" id="reset" class="btn-flat grey-text waves-effect">
-                <input type="submit" class="btn green waves-effect waves-light" value="Login">
-            </div>
         </form>
     </div>
-</div>-->
+    <div class="modal-footer">
+        <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Cancelar</a>
+        <a class="modal-action modal-close waves-effect waves-green btn-flat" (click)="resetPassword()">Enviar</a>
+    </div>
+</div>

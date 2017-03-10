@@ -12,12 +12,97 @@ $brand-logo-iso: '../assets/img/logo-mobile.svg';
 body,
 html {
     background: linear-gradient(to top, #004099 0%, $brand-color 100%);
-    background-color: transparent;
+    // background-color: transparent;
+    // background: $app-bg;
     height: 100%;
     font-family: $app-font;
 }
 
-.container-fluid {
+.fluid-container {
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.flex-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.flex-item {
+    padding: 5px;
+    width: auto;
+    height: auto;
+    margin: 10px;
+}
+
+.btn, .btn-large {
+    background-color: $brand-color !important;
+    box-shadow: none !important;
+}
+
+.btn-full-width {
+    width: 100% !important;
+}
+
+.btn:disabled {
+    color:#FFFFFF !important
+}
+
+.facebook-signin {
+    background-color: #3B5998 !important;
+}
+
+.google-signin {
+    background-color: #DB3236 !important;
+}
+
+input[type="checkbox"]:checked + label:before {
+    border-right-color: $brand-color !important;
+    border-bottom-color: $brand-color !important;
+}
+
+input[type=text]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]) {
+    border-bottom: 1px solid $brand-color;
+    box-shadow: 0 1px 0 0 $brand-color;
+}
+
+input[type=text]:focus:not([readonly]) + label,
+input[type=email]:focus:not([readonly]) + label,
+input[type=password]:focus:not([readonly]) + label {
+    color: $brand-color;
+}
+
+input[type=password] {
+    font-size: x-large;
+}
+
+.progress {
+    background-color: #AACEFF;
+}
+
+.progress .indeterminate {
+    background-color: $brand-color;
+}
+
+.form-error {
+    background-color: #FF5050;
+    color: #FFF;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid rgba(160, 160, 160, 0.2);
+    padding: 0;
 }

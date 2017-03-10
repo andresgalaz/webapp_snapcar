@@ -1,37 +1,3 @@
-/*
- * SnapCar Theme
- * Versión: 1.0
- */
-
-// Variables globales
-$app-bg: #FAFAFA; // #252830
-$app-font: 'Roboto', sans-serif;
-$brand-color: #006BFF;
-$brand-logo-iso: '../assets/img/logo-mobile.svg';
-
-body,
-html {
-    // background-color: $app-bg;
-    height: 100%;
-    font-family: $app-font;
-}
-
-.container-fluid {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-input[type=email]:focus:not([readonly]),
-input[type=password]:focus:not([readonly]) {
-    border-bottom: 1px solid $brand-color;
-    box-shadow: 0 1px 0 0 $brand-color;
-}
-
-input[type=email]:focus:not([readonly]) + label,
-input[type=password]:focus:not([readonly]) + label {
-    color: $brand-color;
-}
-
 /* Google Maps */
 .sebm-google-map-container {
     height: 300px;

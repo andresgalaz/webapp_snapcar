@@ -1,16 +1,22 @@
-@import '../app.component';
+@import '../../styles';
 
-body {
-    background-color: linear-gradient(to top, #004099 0%, $brand-color 100%);
+body,
+html {
+    background: linear-gradient(to top, #004099 0%, $brand-color 100%) !important;
 }
 
-.login-container {
-    height: 100%;
-    width: 100%;
-    margin-bottom: -20px;
+.login {
+    max-width: 400px;
 }
 
-.btn {
-    background-color: $brand-color;
-    box-shadow: none;
+.login-link {
+    border-bottom: 1px dotted #909090;
+    color: #909090 !important;
+    font-size: 0.8em;
+    text-transform: initial !important;
+    transition: all 1s;
+}
+
+.login-link:hover {
+    color: $brand-color !important;
 }

@@ -15,6 +15,13 @@ import { GaugeComponent } from './gauge/gauge.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
+import { SignupComponent } from './signup/signup.component';
+
+import { AuthGuard } from './auth.guard';
+import { AuthenticationService } from './authentication.service'
+import { FacebookService } from 'ng2-facebook-sdk';
+import { SignupService } from './signup.service';
 
 @NgModule({
     declarations: [
@@ -24,7 +31,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         GaugeComponent,
         BreadcrumbComponent,
         LoginComponent,
-        DashboardComponent
+        DashboardComponent,
+        HomeComponent,
+        SignupComponent
     ],
     imports: [
         BrowserModule,
@@ -37,7 +46,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         }),
         ChartsModule
     ],
-    providers: [],
+    providers: [AuthGuard, AuthenticationService, FacebookService, SignupService],
     bootstrap: [AppComponent],
     entryComponents: [BreadcrumbComponent, GaugeComponent]
 })
