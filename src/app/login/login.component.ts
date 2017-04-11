@@ -96,7 +96,6 @@ export class LoginComponent implements OnInit {
                     }
                 )
         }
-
     }
 
     // Facebook Login

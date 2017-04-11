@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FacebookService, FacebookLoginResponse, FacebookInitParams, FacebookLoginStatus } from 'ng2-facebook-sdk';
-import { AuthenticationService } from '../authentication.service';
+import { Component, Injectable, NgZone } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
+import { Observable } from 'rxjs';
 import { SignupService } from '../signup.service';
+
+declare let FB: any;
+declare var gapi: any;
 
 @Component({
     selector: 'app-signup',
@@ -10,76 +13,87 @@ import { SignupService } from '../signup.service';
     styleUrls: ['./signup.component.scss']
 })
 
-export class SignupComponent implements OnInit {
-    error: string = '';
-    loading: boolean = false;
-    facebook: string = '';
-    facebookStatus: string = '';
-    facebookAccessToken: string = '';
+export class SignupComponent {
+    facebookAccessToken: string = null;
+    googleAccessToken: string = null;
+    userEmail: string = null;
+    userName: string = null;
+    userBirthday: string = null;
+    userPassword: string = null;
+    userDNI: string = null;
+    userImage: string = null;
+    token: string = null;
 
     constructor(
-        private authenticationService: AuthenticationService,
-        private router: Router,
+        private ngZone: NgZone,
+        private http: Http,
         private signUpService: SignupService
-        // private fb: FacebookService,
-        // private signUpService: SignupService
     ) {
-        // let fbParams: FacebookInitParams = {
-        //     appId: '1820396898212790',
-        //     xfbml: true,
-        //     version: 'v2.8'
-        // };
-        // this.fb.init(fbParams);
+        this.facebookInit();
+        window['onSignIn'] = (user) => ngZone.run(() => this.googleSignUp(user));
     }
 
-    ngOnInit() { }
-
-    facebookTestLogin() {
-        this.signUpService.facebookSignIn();
+    // Inicializa Facebook API
+    facebookInit() {
+        FB.init({
+            appId: '1820396898212790',
+            xfbml: true,
+            version: 'v2.8'
+        })
     }
 
-// facebookLogin(): void {
-//         this.loading = true;
-//         this.fb.getLoginStatus().then(
-//             (response: FacebookLoginStatus) => {
-//                 this.facebookStatus = response.status;
-//                 if (this.facebookStatus !== 'connected') {
-//                     this.fb.login({
-//                         return_scopes: true,
-//                         scope: 'public_profile,email'
-//                     }).then(
-//                         (response: FacebookLoginResponse) => {
-//                             if (response.authResponse.grantedScopes.indexOf('email') >= 0) {
-//                                 this.facebookAccessToken = response.authResponse.accessToken;
-//                                 this.fb.api('me?fields=email,name,gender,picture,cover', 'get')
-//                                     .then(response => {
-//                                         this.authenticationService
-//                                             .login(response.email, '', this.facebookAccessToken, '')
-//                                             .subscribe(
-//                                                 result => {
-//                                                     if (result) {
-//                                                         this.router.navigate(['/']);
-//                                                     }
-//                                                 },
-//                                                 error => {
-//                                                     console.log(error);
-//                                                     if (error.status === 401) {
-//                                                         this.error = 'No es posible acceder mediante Facebook';
-//                                                         this.loading = false;
-//                                                     }
-//                                                 })
-//                                     });
-//                             } else {
-//                                 this.error = 'Debes proporcionar email';
-//                             }
-//                         },
-//                         (error: any) => {
-//                             console.log(error);
-//                             this.loading = false;
-//                         }
-//                     )}
-//             },
-//             (error: any) => console.error(error)
-//         )}
+    // Obtener datos de Facebook para el registro
+    // ToDo: Autorizar obtención de fecha de nacimiento
+    facebookSignUp() {
+        FB.getLoginStatus(function (response) {
+            if (response.status === 'connected') {
+                console.log('Ya está conectado.');
+            }
+            else {
+                FB.login(function (response) {
+                    if (response.status === 'connected') {
+                        this.facebookAccessToken = response.authResponse.accessToken;
 
+                        FB.api('me', { fields: 'email, name, picture' }, function (response) {
+                            this.userEmail = response.email;
+                            this.userName = response.name;
+                            this.userImage = response.picture.data.url;
+
+                            this.signUpService
+                                .signUp(response.email, '', response.name, '', '', '', response.picture.data.url)
+                                .suscribe(
+                                    result => {
+                                        console.log(result);
+                                    },
+                                    error => {
+                                        console.log(error);
+                                    }
+                                )
+                        })
+                    } else {
+                        console.log('Debe autorizar la aplicación para poder registrarse.');
+                    }
+                }, { scope: 'public_profile, email' });
+            }
+        });
+    }
+
+    // Obtener datos de Google para el registro
+    googleSignUp(googleUser): void {
+        let userProfile = googleUser.getBasicProfile();
+
+        if (userProfile) {
+            this.googleAccessToken = googleUser.getAuthResponse().id_token;
+            this.userEmail = userProfile.getEmail();
+            this.userName = userProfile.getName();
+            this.userImage = userProfile.getImageUrl();
+        } else {
+            console.log('Debe autorizar la aplicación para poder registrarse.');
+        }
+    }
+
+    // Obtener datos desde el formulario
+    formSignUp(form: NgForm) {
+
+    }
 }
